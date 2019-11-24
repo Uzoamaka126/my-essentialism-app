@@ -1,0 +1,38 @@
+{
+  "name": "my-essentialism-app",
+  "version": "1.0.0",
+  "description": "A mental health and awareness application that helps you to focus on your values ang goals",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Uzoamaka126/my-essentialism-app.git"
+  },
+  "author": "Uzoamaka Anyanwu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Uzoamaka126/my-essentialism-app/issues"
+  },
+  "homepage": "https://github.com/Uzoamaka126/my-essentialism-app#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.20.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.2.0",
+    "sqlite3": "^4.1.0",
+    "styled-components": "^4.4.1"
+  },
+  "devDependencies": {
+    "cross-env": "^6.0.3",
+    "dotenv": "^8.2.0",
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.1",
+    "supertest": "^4.0.2"
+  }
+}
