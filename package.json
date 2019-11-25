@@ -4,7 +4,11 @@
   "description": "A mental health and awareness application that helps you to focus on your values ang goals",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon index.js",
+    "dropMigration": "npx knex migrate:down",
+    "migration": "npx knex migrate:rollback && npx knex migrate:latest",
+    "test": "cross-env NODE_ENV=test npm run migration && jest --verbose --coverage ",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -15,12 +19,17 @@
   "bugs": {
     "url": "https://github.com/Uzoamaka126/my-essentialism-app/issues"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
   "homepage": "https://github.com/Uzoamaka126/my-essentialism-app#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "g": "^2.0.1",
     "helmet": "^3.21.2",
     "httpie": "^1.1.2",
     "jsonwebtoken": "^8.5.1",
