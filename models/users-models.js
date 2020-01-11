@@ -14,7 +14,7 @@ function get() {
 function getById(id) {
     return db('users')
         .select('id', 'username', 'email')
-        .where({ id })
+        .where({ 'id': id })
         .first()
 }
 

@@ -1,15 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
+import * as actions from './redux-store/actions/actionCreators';
 
-// Application Components
-import Home from '../src/components/Home';
-import AboutUs from '../src/components/navigation/AboutUs';
-import Signup from '../src/components/auth/Signup';
-import Login from '../src/components/auth/Login';
-import Dashboard from '../src/components/userDashboard/Dashboard';
+import Home from './components/Home';
+import AboutUs from './components/navigation/AboutUs';
+import Login from './components/auth/Login';
+import Signup from './components/auth/Signup';
+import Dashboard from './components/userDashboard/Dashboard';
 
-function App() {
+
+function App(props) {
   return (
     <Router>
         <div className="App">
@@ -19,11 +21,11 @@ function App() {
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>
           <Route exact path="/dashboard" component={Dashboard}/>
-
+          {/* <Route exact path="/values" component={Values}/> */}
         </main>
       </div>
     </Router>
   );
 }
 
-export default App;
+export default connect(state=>state, actions)(App);

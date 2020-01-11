@@ -1,13 +1,23 @@
 import React from 'react';
-import BgImg from '../assets/bg-img-1.svg'
+import { Route, NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+// Import assets
+import BgImg from '../assets/bg-img-1.svg';
+// Import Components
 import Navbar from '../components/navigation/Navbar'
+import SignUp from './auth/Signup';
+import * as actions from '../redux-store/actions/actionCreators';
 
+// Import Components from MaterialUI
 import {  makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box';
-// import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button';
+
+// helper function
+import { withAthCheck } from '../_helpers/authenticationChecker';
+import PrivateRoute from './auth/ProtectedRoute';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -26,8 +36,14 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function Home() {
+export  function Home(props) {
     const classes = useStyles();
+
+    const onLogout =() => {
+        localStorage.clear();
+        props.history.replace('/');
+    };
+
     return (
         <Box>
             <Navbar />
@@ -44,8 +60,12 @@ export default function Home() {
             </Paper>
             
             </Grid>
-        
-        
+            
       </Box>
     )
 }
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps, actions)(Home);
