@@ -3,8 +3,8 @@ const Values = require('../models/value-model');
 const v = require('../variables/variables');
 const protectedMiddleware = require('../helpers/protectedMiddleware');
 
-
-router.get('/', protectedMiddleware, (req,  res) => {
+// Get all values no userId require
+router.get('/', (req,  res) => {
     Values.get()
         .then(values => {
             res.status(200).json(values)
@@ -14,7 +14,8 @@ router.get('/', protectedMiddleware, (req,  res) => {
         })
 })
 
-router.post('/', protectedMiddleware, (req, res) => {
+// Add a new value, no userId required
+router.post('/', (req, res) => {
     Values
         .addValue(req.body)
         .then(newValue => {

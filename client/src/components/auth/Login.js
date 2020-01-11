@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
 import { Link, Route} from "react-router-dom";
 
 import formImg from '../../assets/form-img.svg';
@@ -6,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import IconButton from '@material-ui/core/IconButton';
+import * as actionCreators from '../../redux-store/actions/actionCreators';
 
 
 const useStyles = makeStyles(theme => ({
@@ -19,8 +22,28 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-export default function Login() {
+export default function Login(props) {
     const classes = useStyles();
+
+    // Get the value of the form inputs
+    const usernameRef = useRef();
+    const passwordRef = useRef();
+
+    const submitLogin = (e) => {
+        e.preventDefault()
+        axios
+        .post("https://my-essentialism-app.herokuapp.com/api/auth/login", {
+            username: usernameRef.current.value,
+            password: passwordRef.current.value,    
+        })
+        .then(res => {
+            localStorage.setItem("token", res.data.token);
+            props.history.push('/dashboard');
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
 
     return (
         <div>
