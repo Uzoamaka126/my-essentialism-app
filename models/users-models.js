@@ -9,19 +9,19 @@ module.exports = {
 
 function get() {
     return db('users')
-        .select('id', 'username', 'email')
+        .select('id', 'fullname', 'email')
 }
 
 function getById(id) {
     return db('users')
-        .select('id', 'username', 'email')
+        .select('id', 'fullname', 'email', 'jwt', 'isVerified')
         .where({ 'id': id })
         .first()
 }
 
 function getBy(filter) {
     return db('users')
-        .select("id", "username", "isVerified", "password", "email")
+        .select("id", "fullname", "isVerified", "password", "email")
         .where(filter)
         .first()
 }
@@ -39,14 +39,14 @@ async function addNewUser(user) {
 } 
 
 // verify user
-async function verifyUser(id) {
+async function verifyUser(token, id) {
     try {
         await db("users")
-        .where({ id: id })
-        .update({ isVerified: 1 });
+          .where({ jwt: token })
+          .update({ isVerified: 1 });
         const response = await getById(id);
         return response;
-    } catch (error) {
-      console.log(error);
+      } catch (error) {
+        console.log(error);
     }
 } 

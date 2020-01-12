@@ -15,7 +15,7 @@ const sendConfirmationEmail = async (userEmail, token) => {
 
     const email = {
         body: {
-          name: "There",
+          name: "Welcome New Essentialist",
           intro: "Verify your email",
           action: {
             instructions: "Please click the button below to verify your account",
@@ -34,7 +34,7 @@ const sendConfirmationEmail = async (userEmail, token) => {
     const msg = {
         to: userEmail,
         from: "no-reply@essentialism.com",
-        subject: "Email Verification",
+        subject: "Please verify your email address",
         html: emailTemplate
     };
 

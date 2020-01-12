@@ -2,7 +2,7 @@ const db = require('../database/db-config');
 const userModel = require('./users-models');
 
 module.exports = {
-    get,
+    getValues,
     getById,
     getByUserId,
     getBy,
@@ -11,7 +11,7 @@ module.exports = {
     addUserValue
 }
 
-function get() {
+function getValues() {
     return db('values')
         .select('id', 'value_name')
 }

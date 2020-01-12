@@ -1,7 +1,7 @@
 const express = require("express");
 const { validateLoginData, validateSignupData} = require("../helpers/validator");
 const { userExists } = require("../helpers/userExists");
-const { registerUser, loginUser, verifyEmail } = require("../services/auth-services");
+const { registerUser, loginUser } = require("../services/auth-services");
 
 const router = express.Router();
 
@@ -17,17 +17,17 @@ router.post("/register", validateSignupData, userExists, async (req, res) => {
     }
 })
 
-router.post("/verify/:id/:oken", async (req, res) => {
-    try {
-        const { token, id } = req.params;
-        const verifiedUser = await verifyEmail(token, id);
-        res.status(200).json(verifiedUser)
-    } catch (error){
-        res.status(500).json({
-            error: error.message
-        })
-    }
-});
+// router.post("/verify/:id/:token", async (req, res) => {
+//     try {
+//         const { token, id } = req.params;
+//         const verifiedUser = await verifyEmail(token, id);
+//         res.status(200).json(verifiedUser)
+//     } catch (error){
+//         res.status(500).json({
+//             error: error.message
+//         })
+//     }
+// });
 
 router.post("/login", validateLoginData, async (req, res) => {
     try {
