@@ -4,7 +4,7 @@ const protectedMiddleware = require('../helpers/protectedMiddleware');
 const v = require('../variables/variables');
 const tg = require('../helpers/tokenGenerator');
 
-const Auth = require('../models/auth-model');
+const Users = require('../models/users-models');
 
 // Register endpoint
 router.post('/register', (req, res) => {
@@ -13,7 +13,7 @@ router.post('/register', (req, res) => {
     const hash = bcrypt.hashSync(user.password, 10);
     user.password = hash;
 
-    Auth.add(user)
+    Users.add(user)
         .then(saved => {
             if(saved) {
                 const token = tg.generateToken(saved);
@@ -38,7 +38,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     let { username, password } = req.body;
 
-    Auth.getBy({ username })
+    Users.addNewUser({ username })
         .first()
         .then(user => {
             if(user && bcrypt.compareSync(password, user.password)) {
