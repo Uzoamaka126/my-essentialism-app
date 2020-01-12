@@ -51,6 +51,8 @@ router.post('/:id/values', (req, res) => {
     Values
         .getByUserId(id)
         .then(value => {
+            console.log(value)
+
             if(value) {
                 Values.addUserValue(valueData, id)
                     .then(valueData => {

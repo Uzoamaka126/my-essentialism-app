@@ -13,20 +13,5 @@ router.get('/', async (req,  res, next) => {
     }
 })
 
-// // Add a new value, no userId required
-// router.post('/', (req, res) => {
-//     Values
-//         .addValue(req.body)
-//         .then(newValue => {
-//             return res.status(201).json({
-//                 message: v.newValueAdded,
-//                 newValue
-//             })
-//         })
-//         .catch(error => {
-//             res.status(500).json(error);
-//         })
-// });
-
 
 module.exports = router;
