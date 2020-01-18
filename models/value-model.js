@@ -2,16 +2,15 @@ const db = require('../database/db-config');
 const userModel = require('./users-models');
 
 module.exports = {
-    get,
+    getValues,
     getById,
     getByUserId,
     getBy,
-    addValue,
     getUserValues,
     addUserValue
 }
 
-function get() {
+function getValues() {
     return db('values')
         .select('id', 'value_name')
 }
@@ -35,19 +34,11 @@ function getBy(filter) {
         .where(filter)
 }
 
-function addValue(value) {
-    return db('values')
-        .insert(value)
-        .then((ids => {
-            return getById(ids[0]);
-        }));
-}
-
 function addUserValue(value, userId) {
     return db('users_and_values as uv')
         .insert(value, 'id')
-        .select('users as u', 'uv.user_id', 'uv.value_id')
-        .select('values as v')
+        .select('users as u', 'uv.user_id', 'u.id')
+        .select('values as v', 'uv.value_id')
         .where({ 'u.id': userId })
         .then((ids => {
             return getByUserId(ids[0]);
