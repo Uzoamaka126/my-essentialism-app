@@ -8,7 +8,7 @@ const Projects = require('../models/projects-model');
 
 
 // Get all the users of the application
-router.get('/', protectedMiddleware, (req, res) => {
+router.get('/', (req, res) => {
     Users.get()
         .then(users => {
             res.status(200).json(users)
@@ -18,8 +18,20 @@ router.get('/', protectedMiddleware, (req, res) => {
         })
 });
 
+// Get a specific user
+router.get('/:id', (req, res) => {
+    const { id } = req.params;
+    Users.getById(id)
+        .then(user => {
+            res.status(200).json(user)
+        })                
+        .catch(error => {
+            res.status(500).json(error)
+        })
+});
+
 // Get all values for a specified user
-router.get('/:id/values', protectedMiddleware, (req, res) => {
+router.get('/:id/values', (req, res) => {
     const { id } = req.params;
     Values.getUserValues(id) 
         .then(values => {
@@ -32,13 +44,15 @@ router.get('/:id/values', protectedMiddleware, (req, res) => {
 })
 
 // Add a new value for a specified user
-router.post('/:id/values', protectedMiddleware, (req, res) => {
+router.post('/:id/values', (req, res) => {
     const valueData = req.body;
     const { id } = req.params;
 
     Values
         .getByUserId(id)
         .then(value => {
+            console.log(value)
+
             if(value) {
                 Values.addUserValue(valueData, id)
                     .then(valueData => {
@@ -58,23 +72,41 @@ router.post('/:id/values', protectedMiddleware, (req, res) => {
         })
 })
 
-// Get all the list of projects associated with a specific user
-router.get('/:id/projects', protectedMiddleware, (req, res) => {
-        const { id } = req.params;
-        Projects.get() 
-            .then(projects => {
-                res.status(200).json(projects)
-            })
-            .catch(error => {
-                res.status(500).json(error)
-            })
-        
-    })
+// Get all the list of projects associated with a specific user based on their values
+router.get('/:id/values/:valueId/projects', (req, res) => {
+    const { valueId } = req.params;
+    const { id } = req.params;
+    
+    console.log(req.params);
+    Projects.getUserValueProjects() 
+        .then(projects => {
+            res.status(200).json(projects)
+        })
+        .catch(error => {
+            res.status(500).json(error)
+        })
+})
 
-// Add a ne project from a specified user
-router.post('/:id/projects', protectedMiddleware, (req, res) => {
+// Get all the list of projects associated with a specific user
+router.get('/:id/projects', (req, res) => {
+    const { id } = req.params;
+    Projects.getUserProjects() 
+        .then(projects => {
+            res.status(200).json(projects)
+        })
+        .catch(error => {
+            res.status(500).json(error)
+        })
+})
+
+// Add a new project from a specified user
+router.post('/:id/values/:valueId/projects', (req, res) => {
     const projectData = req.body;
     const { id } = req.params;
+    const { valueId } = req.params;
+
+
+    console.log(req.params)
 
     Projects
         .getByUserId(id)

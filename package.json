@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/Uzoamaka126/my-essentialism-app#readme",
   "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -34,10 +35,14 @@
     "helmet": "^3.21.2",
     "httpie": "^1.1.2",
     "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^2.2.0",
     "knex": "^0.20.2",
+    "knex-cleaner": "^1.3.0",
+    "mailgen": "^2.0.10",
     "pg": "^7.14.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.2.0",
+    "redux-logger": "^3.0.6",
     "styled-components": "^4.4.1"
   },
   "devDependencies": {
