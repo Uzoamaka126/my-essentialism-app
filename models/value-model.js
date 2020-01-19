@@ -49,6 +49,6 @@ function getUserValues(userId) {
     return db('users_and_values as uv')
         .join('users as u', 'u.id', 'uv.user_id')
         .join('values as v', 'v.id', 'uv.value_id')
-        .select('v.id', 'u.id', 'v.value_name', 'u.username')
+        .select('v.id', 'u.id', 'v.value_name', 'u.fullname')
         .where({ 'u.id': userId })
 }
