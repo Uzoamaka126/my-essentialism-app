@@ -6,6 +6,7 @@ async function addValues(values) {
 }
 
 async function getValues(id) {
+    // get the values of th user
     const values = await userValues.getUserValues(id);
 
     if(!values) {

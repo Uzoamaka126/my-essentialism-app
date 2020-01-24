@@ -1,12 +1,4 @@
 const db = require('../database/db-config');
-const userModel = require('./users-models');
-
-module.exports = {
-    getValues,
-    getUsersIdByValues,
-    getUserValues,
-    addUserValues
-}
 
 function getValues() {
     return db('values')
@@ -53,8 +45,8 @@ function getValues() {
 
 async function addUserValues(values) {
     try {
-        const [id] = await db('users_and_values').insert(values, "id")
-        const response = await getUsersIdByValues(id)
+        const [id] = await db('users_values').insert(values, "id")
+        const response = await getUsersIdByValues(id);
         return response;
     } catch (error) {
         console.log(error);
@@ -80,4 +72,12 @@ async function getUserValues() {
     } catch (error) {
         console.log(error)
     }
+}
+
+
+module.exports = {
+    getValues,
+    getUsersIdByValues,
+    getUserValues,
+    addUserValues
 }

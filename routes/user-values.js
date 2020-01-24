@@ -8,6 +8,7 @@ router.post("/", authenticateUser, async (req, res, next) => {
     const values = req.body;
     try {
         const userId = req.user.subject;
+        
         values.map((value) => {
             service.addValues({
                 name: value,
@@ -24,7 +25,7 @@ router.post("/", authenticateUser, async (req, res, next) => {
     }
 });
 
-router.get("/", async (req, res, next) => {
+router.get("/", authenticateUser, async (req, res, next) => {
     try {
         const response = await service.getValues()
         res.status(200).json({
