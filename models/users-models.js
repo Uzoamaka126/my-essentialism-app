@@ -7,6 +7,17 @@ module.exports = {
     verifyUser    
 }
 
+async function addNewUser(user) {
+    try {
+        const ids = await db("users").insert(user, "id");
+        const id = ids[0];
+        const response = await getById(id);
+        return response;
+    } catch (err) {
+        console.log(err);
+    }
+} 
+
 function get() {
     return db('users')
         .select('id', 'fullname', 'email')
@@ -15,7 +26,7 @@ function get() {
 function getById(id) {
     return db('users')
         .select('id', 'fullname', 'email', 'jwt', 'isVerified')
-        .where({ 'id': id })
+        .where({ id: id })
         .first()
 }
 
@@ -27,16 +38,7 @@ function getBy(filter) {
 }
 
 // Add a new user
-async function addNewUser(user) {
-    try {
-        const ids = await db("users").insert(user);
-        const id = ids[0];
-        const response = await getById(id);
-        return response;
-    } catch (err) {
-        console.log(err);
-    }
-} 
+
 
 // verify user
 async function verifyUser(token, id) {

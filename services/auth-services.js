@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const sendConfirmationEmail = require('../helpers/verificationEmail');
+// const sendConfirmationEmail = require('../helpers/verificationEmail');
 const { verifyUser, getBy, addNewUser } = require('../models/users-models');
 const {generateToken, generateVerificationToken } = require('../helpers/tokenGenerator');
 
