@@ -14,7 +14,7 @@ exports.registerUser = async user => {
         const response = await addNewUser(user);
         const token = generateToken(response);
         
-        sendConfirmationEmail(response.email, response.jwt);
+        // sendConfirmationEmail(response.email, response.jwt);
         return {
             response,
             token
